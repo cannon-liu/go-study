@@ -16,3 +16,4 @@
 
 # avoid temp file
 **/.DS_Store
+.idea
