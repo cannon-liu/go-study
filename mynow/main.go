@@ -76,3 +76,109 @@ func With(t time.Time) *Now {
 func New(t time.Time) *Now {
 	return With(t)
 }
+
+// BeginningOfMinute beginning of minute
+func BeginningOfMinute() time.Time {
+	return With(time.Now()).BeginningOfMinute()
+}
+
+// BeginningOfHour beginning of hour
+func BeginningOfHour() time.Time {
+	return With(time.Now()).BeginningOfHour()
+}
+
+// BeginningOfDay beginning of day
+func BeginningOfDay() time.Time {
+	return With(time.Now()).BeginningOfDay()
+}
+
+// BeginningOfWeek beginning of week
+func BeginningOfWeek() time.Time {
+	return With(time.Now()).BeginningOfWeek()
+}
+
+// BeginningOfMonth beginning of month
+func BeginningOfMonth() time.Time {
+	return With(time.Now()).BeginningOfMonth()
+}
+
+// BeginningOfQuarter beginning of quarter
+func BeginningOfQuarter() time.Time {
+	return With(time.Now()).BeginningOfQuarter()
+}
+
+// BeginningOfYear beginning of year
+func BeginningOfYear() time.Time {
+	return With(time.Now()).BeginningOfYear()
+}
+
+// EndOfMinute end of minute
+func EndOfMinute() time.Time {
+	return With(time.Now()).EndOfMinute()
+}
+
+// EndOfHour end of hour
+func EndOfHour() time.Time {
+	return With(time.Now()).EndOfHour()
+}
+
+// EndOfDay end of day
+func EndOfDay() time.Time {
+	return With(time.Now()).EndOfDay()
+}
+
+// EndOfWeek end of week
+func EndOfWeek() time.Time {
+	return With(time.Now()).EndOfWeek()
+}
+
+// EndOfMonth end of month
+func EndOfMonth() time.Time {
+	return With(time.Now()).EndOfMonth()
+}
+
+// EndOfQuarter end of quarter
+func EndOfQuarter() time.Time {
+	return With(time.Now()).EndOfQuarter()
+}
+
+// EndOfYear end of year
+func EndOfYear() time.Time {
+	return With(time.Now()).EndOfYear()
+}
+
+// Monday monday
+func Monday() time.Time {
+	return With(time.Now()).Monday()
+}
+
+// Sunday sunday
+func Sunday() time.Time {
+	return With(time.Now()).Sunday()
+}
+
+// EndOfSunday end of sunday
+func EndOfSunday() time.Time {
+	return With(time.Now()).EndOfSunday()
+}
+
+func Parse(strs ...string) (time.Time, error) {
+	return With(time.Now()).Parse(strs...)
+}
+
+func ParseInLocation(loc *time.Location, strs ...string) (time.Time, error) {
+	return With(time.Now().In(loc)).Parse(strs...)
+}
+
+func MustParse(strs ...string) time.Time {
+	return With(time.Now()).MustParse(strs...)
+}
+
+func MustParseInLocation(loc *time.Location, strs ...string) time.Time {
+	return With(time.Now().In(loc)).MustParse(strs...)
+}
+
+// Between check now between the begin, end time or not
+func Between(time1, time2 string) bool {
+	return With(time.Now()).Between(time1, time2)
+}

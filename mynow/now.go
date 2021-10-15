@@ -59,6 +59,61 @@ func (now *Now) BeginningOfYear() time.Time {
 	return time.Date(y, time.January, 1, 0, 0, 0, 0, now.Location())
 }
 
+func (now *Now) EndOfMinute() time.Time {
+	return now.BeginningOfMinute().Add(time.Minute - time.Nanosecond)
+}
+
+func (now *Now) EndOfHour() time.Time {
+	return now.BeginningOfHour().Add(time.Hour - time.Nanosecond)
+}
+
+func (now *Now) EndOfDay() time.Time {
+	y, m, d := now.Date()
+	return time.Date(y, m, d, 23, 59, 59, int(time.Second-time.Nanosecond), now.Location())
+}
+
+func (now *Now) EndOfWeek() time.Time {
+	return now.BeginningOfWeek().AddDate(0, 0, 7).Add(-time.Nanosecond)
+}
+
+func (now *Now) EndOfMonth() time.Time {
+	return now.BeginningOfMonth().AddDate(0, 1, 0).Add(-time.Nanosecond)
+}
+
+func (now *Now) EndOfQuarter() time.Time {
+	return now.BeginningOfQuarter().AddDate(0, 3, 0).Add(-time.Nanosecond)
+}
+
+func (now *Now) EndOfHalf() time.Time {
+	return now.BeginningOfHalf().AddDate(0, 6, 0).Add(-time.Nanosecond)
+}
+
+func (now *Now) EndOfYear() time.Time {
+	return now.BeginningOfYear().AddDate(1, 0, 0).Add(-time.Nanosecond)
+}
+
+func (now *Now) Monday() time.Time {
+	t := now.BeginningOfDay()
+	weekday := int(t.Weekday())
+	if weekday == 0 {
+		weekday = 7
+	}
+	return t.AddDate(0, 0, -weekday+1)
+}
+
+func (now *Now) Sunday() time.Time {
+	t := now.BeginningOfDay()
+	weekday := int(t.Weekday())
+	if weekday == 0 {
+		return t
+	}
+	return t.AddDate(0, 0, (7 - weekday))
+}
+
+func (now *Now) EndOfSunday() time.Time {
+	return New(now.Sunday()).EndOfDay()
+}
+
 var hasTimeRegexp = regexp.MustCompile(`(\s+|^\s*)\d{1,2}((:\d{1,2})*|((:\d{1,2}){2}\.(\d{3}|\d{6}|\d{9})))\s*$`) // match 15:04:05, 15:04:05.000, 15:04:05.000000 15, 2017-01-01 15:04, etc
 
 var onlyTimeRegexp = regexp.MustCompile(`^\s*\d{1,2}((:\d{1,2})*|((:\d{1,2}){2}\.(\d{3}|\d{6}|\d{9})))\s*$`) // match 15:04:05, 15, 15:04:05.000, 15:04:05.000000, etc
